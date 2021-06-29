@@ -27,9 +27,9 @@ pipeline {
       steps{
         script {
             dockerImage.inside {
-                sh "pwsh 'echo book'"
-                sh "pwsh 'echo pay'"
-                sh "pwsh 'echo shudownserver'"
+                sh """pwsh -command 'Invoke-WebRequest -Uri http://localhost:8086/Selectitem -Method Post -Body "{ item: 12345 }"  -ContentType "application/json"'"""
+                sh """pwsh -command 'Invoke-WebRequest -Uri http://localhost:8086/pay'"""
+                sh """pwsh -command 'echo shudownserver'"""
             }
         }
       }
