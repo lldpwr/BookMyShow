@@ -20,7 +20,7 @@ Start-PodeServer -ListenerType Kestrel {
     #Select item
     Add-PodeRoute -Method Post -Path '/Selectitem' -ScriptBlock {
         $item = $WebEvent.Data.item
-        Write-PodeTextResponse -value '<html><body><h1>Book My Show</h1><p>You have selected {0} </p><a href="/pay">Pay</a><br><a href="/html">Main Page</a></body></html>' -ContentType "Text/html"
+        Write-PodeTextResponse -value ('<html><body><h1>Book My Show</h1><p>You have selected {0}</p><a href="/pay">Pay</a><br><a href="/html">Main Page</a></body></html>' -f $item) -ContentType "Text/html"
     }
 
     # pay 
