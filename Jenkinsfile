@@ -26,7 +26,7 @@ pipeline {
     stage("run and test image") {
       steps{
         script {
-            dockerImage.inside {
+            dockerImage.inside("-p 8086:8086") {
                 sh "pwsh tests/request.ps1"
             }
         }
