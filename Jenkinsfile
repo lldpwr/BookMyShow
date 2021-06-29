@@ -27,9 +27,9 @@ pipeline {
       steps{
         script {
             dockerImage.inside {
-                powershell "echo book"
-                powershell "echo pay"
-                powershell "echo shudownserver"
+                sh "pwh 'echo book'"
+                sh "pwh 'echo pay'"
+                sh "pwh 'echo shudownserver'"
             }
         }
       }
