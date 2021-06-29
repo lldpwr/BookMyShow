@@ -1,0 +1,54 @@
+---
+-  name: Jenkins
+   hosts:
+      - Jenkins
+   become: yes
+   environment:
+      JAVA_OPTS: -Djenkins.install.runSetupWizard=false      
+   tasks: 
+      - name: Add an Apt signing key from Jenkins
+        ansible.builtin.apt_key:
+            url: https://pkg.jenkins.io/debian-stable/jenkins.io.key
+            state: present
+      - name: add
+        copy:
+            content: deb http://pkg.jenkins.io/debian-stable binary/
+            dest: /etc/apt/sources.list.d/jenkins.list
+            owner: root
+            group: root
+            mode: 0644
+      - name: Update repositories cache and install Java package
+        apt:
+            name: openjdk-8-jdk
+            update_cache: yes
+      - name: Update repositories cache and install Maven package
+        apt:
+            name: maven   
+      - name: Update repositories cache and install git package
+        apt:
+            name: git
+      - name: Update repositories cache and install Jenkins package
+        apt:
+            name: jenkins
+            update_cache: yes
+      - name: Make sure Jenkins is started
+        sysvinit:
+            name: jenkins
+            state: restarted
+            enabled: yes
+      - name: Wait until the file initialAdminPassword is present before continuing
+        wait_for:
+           path: /var/lib/jenkins/secrets/initialAdminPassword
+      - name: get Jenkins initial password
+        command: cat /var/lib/jenkins/secrets/initialAdminPassword
+        register: result
+      - name: display Jenkins password
+        debug:
+           msg: "{{result.stdout}}"
+      - name: Get uptime information
+        command: mvn --version
+        register: result
+      - name: display maven version
+        debug:
+           msg: "{{result.stdout}}"
+
