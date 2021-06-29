@@ -1,0 +1,12 @@
+---
+- name: install boto
+  hosts: ubuntu 
+  tasks:
+     - name: install boto, botocore and boto3
+       pip:
+         name: '{{item}}'
+       loop:
+         - boto
+         - botocore
+         - boto3
+
