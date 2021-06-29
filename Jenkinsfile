@@ -13,7 +13,7 @@ pipeline {
         script {
             properties([pipelineTriggers([pollSCM("H 21 * * *")])])
         }
-        git branch: "main", credentialsId: githubCredential, url: "git@github.com:lldpwr/BookMyShow.git"
+        git branch: "Develop", credentialsId: githubCredential, url: "git@github.com:lldpwr/BookMyShow.git"
       }
     }
     stage("Building image") {
