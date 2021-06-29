@@ -27,9 +27,7 @@ pipeline {
       steps{
         script {
             dockerImage.inside {
-                sh """pwsh -command '$ip = (hostname -I) -split " " |  Select-Object -First 1;Invoke-WebRequest -Uri http://${ip}:8086/Selectitem -Method Post -Body "{ item: 12345 }"  -ContentType "application/json"'"""
-                sh """pwsh -command '$ip = (hostname -I) -split " " |  Select-Object -First 1;Invoke-WebRequest -Uri http://${ip}:8086/pay'"""
-                sh """pwsh -command 'echo shudownserver'"""
+                sh "pwsh tests/request.ps1"
             }
         }
       }
