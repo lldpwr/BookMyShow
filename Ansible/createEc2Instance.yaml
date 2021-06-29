@@ -1,0 +1,16 @@
+---
+- name: launch ec2 instance
+  hosts: ubuntu
+  tasks:
+     - name: ec2 instance create
+       ec2:
+         key_name: project
+         group: default
+         instance_type: t2.micro
+         image: ami-09e67e426f25ce0d7
+         region: us-east-1
+         count: 1
+         wait: yes
+         instance_tags:
+             Name: Jenkins
+

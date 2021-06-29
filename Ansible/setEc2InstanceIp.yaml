@@ -1,0 +1,29 @@
+---
+- name: set ec2 instance IP address in the ansible host file
+  hosts: ubuntu
+  tasks:
+     - name: gather ec2 instance facts
+       ec2_instance_info:
+         region: us-east-1
+         filters:
+           "tag:Name": Jenkins
+       register:
+         result
+     - name: display instance info
+       debug:
+         msg: "{{result.instances[0].public_ip_address}}"
+     - name: Update the /etc/hosts file with node name
+       become: yes 
+       lineinfile:
+         path: "/etc/ansible/hosts"
+         regexp: "\\[Jenkins\\]"
+         line: "[Jenkins]"
+         state: present
+     - name: Update the /etc/hosts file with node name
+       become: yes 
+       lineinfile:
+         path: "/etc/ansible/hosts"
+         regexp: ".*ansible_ssh_private_key_file=.*"
+         line: "{{result.instances[0].public_ip_address}} ansible_ssh_private_key_file=/home/ubuntu/.ssh/project.pem ansible_user=ubuntu"
+         state: present
+
