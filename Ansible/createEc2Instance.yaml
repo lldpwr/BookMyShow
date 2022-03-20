@@ -4,7 +4,7 @@
   tasks:
      - name: ec2 instance create
        ec2:
-         key_name: project
+         key_name: Project
          group: default
          instance_type: t2.micro
          image: ami-09e67e426f25ce0d7

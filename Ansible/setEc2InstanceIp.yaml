@@ -12,18 +12,18 @@
      - name: display instance info
        debug:
          msg: "{{result.instances[0].public_ip_address}}"
-     - name: Update the /etc/hosts file with node name
+     - name: Update the /etc/ansible/hosts file with node name
        become: yes 
        lineinfile:
          path: "/etc/ansible/hosts"
          regexp: "\\[Jenkins\\]"
          line: "[Jenkins]"
          state: present
-     - name: Update the /etc/hosts file with node name
+     - name: Update the /etc/ansible/hosts file with node name
        become: yes 
        lineinfile:
          path: "/etc/ansible/hosts"
          regexp: ".*ansible_ssh_private_key_file=.*"
-         line: "{{result.instances[0].public_ip_address}} ansible_ssh_private_key_file=/home/ubuntu/.ssh/project.pem ansible_user=ubuntu"
+         line: "{{result.instances[0].public_ip_address}} ansible_ssh_private_key_file=/home/ubuntu/.ssh/Project.pem ansible_user=ubuntu"
          state: present
 
