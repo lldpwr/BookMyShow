@@ -1,9 +1,9 @@
 
 #!/bin/sh
-# Download and install the prerequisite
-sudo apt update && sudo apt install -y software-properties-common python3-pip
+# Set the prerequisite
+sudo amazon-linux-extras enable ansible2
 # Install Ansible
-sudo apt install -y ansible
+sudo yum install -y ansible
 # Verify current ansible version
 ansible --version
 # Copy the ssh key to authorise the connection to this machine
