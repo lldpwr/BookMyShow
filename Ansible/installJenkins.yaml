@@ -31,6 +31,11 @@
         apt:
             name: jenkins
             update_cache: yes
+      - name: adding jenkins user to group docker
+        user:
+            name: jenkins
+            groups: docker
+            append: yes
       - name: Make sure Jenkins is started
         sysvinit:
             name: jenkins
