@@ -1,6 +1,3 @@
-Install-Module -Name Pode -Confirm:$false -force -Scope CurrentUser
-Install-Module -Name Pode.Kestrel -Confirm:$false -force -Scope CurrentUser
-
 Start-Job { 
 	Wait-Event -SourceIdentifier "" -Timeout 10;
 	$ip = (hostname -I) -split " " |  Select-Object -First 1
