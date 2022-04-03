@@ -1,3 +1,5 @@
+Start-Job { ./startserver.ps1};
+Wait-Event  -Timeout 25;
 $ip = (hostname -I) -split " " |  Select-Object -First 1
 Write-Host "Ip address $ip"
 $content = Invoke-WebRequest -Uri http://${ip}:8086/pay | Select-Object -ExpandProperty RawContent
