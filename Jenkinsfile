@@ -27,7 +27,7 @@ pipeline {
       steps{
         script {
             dockerImage.inside{
-                sh "pwsh tests/request.ps1"
+                sh "pwsh Start-Job { ./startserver.ps1}; tests/request.ps1"
             }
         }
       }
