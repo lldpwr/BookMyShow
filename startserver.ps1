@@ -3,8 +3,10 @@ param (
     $Port=8086
 )
 
-Import-Module Pode
-Import-Module Pode.Kestrel
+# only for jenkins
+Get-ChildItem -Path /root/.local/share/powershell/Modules -Filter "*.psm1" -re | Import-Module
+# Import-Module Pode
+# Import-Module Pode.Kestrel
 Start-PodeServer -ListenerType Kestrel {
     # Find computer ip
     $ip = (hostname -I) -split " " |  Select-Object -First 1

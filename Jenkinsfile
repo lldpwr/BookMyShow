@@ -26,7 +26,9 @@ pipeline {
     stage("run and test image") {
       steps{
         script {
-            dockerImage.run( "pwsh tests/request.ps1")
+            dockerImage.inside{
+                sh "pwsh tests/request.ps1"
+            }
         }
       }
     }
