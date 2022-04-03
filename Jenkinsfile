@@ -1,7 +1,7 @@
 
 pipeline {
   environment {
-    registry = 'lldpwr/jenkinsdockerpowershell'
+    registry = 'lldpwr/bookmyshow'
     registryCredential = 'dockerhub'
     githubCredential = "github"
     dockerImage = ""
