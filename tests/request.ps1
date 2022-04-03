@@ -1,5 +1,5 @@
 Start-Job { ./startserver.ps1};
-Wait-Event -SourceIdentifier "" -Timeout 25;
+Wait-Event -SourceIdentifier "" -Timeout 10;
 $ip = (hostname -I) -split " " |  Select-Object -First 1
 Write-Host "Ip address $ip"
 Get-Job | Receive-Job
